@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="false">
+    <appender name="traceFileLogs" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/home/logs/trace.log"/>
+        <param name="Append" value="true" />
+        <param name="MaxFileSize" value="5MB"></param>
+        <param name="MaxBackupIndex" value="99" />
+        <layout class="JsonPatternLayout">
+            <param name="ConversionPattern"
+                value="[${webAppRootKey}] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %-5p => %c.%M(%F:%L) - %m%n"/>
+        </layout>
+    </appender>
+    <logger name="com.systoon.framework.trace" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="traceFileLogs"/>
+    </logger>
+</log4j:configuration>

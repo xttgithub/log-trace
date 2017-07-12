@@ -1,0 +1,2 @@
+traceReferenceFilter=DubboReferenceFilter
+traceServiceFilter=DubboServiceFilter

@@ -1,0 +1,63 @@
+traceTime:
+  "调用时间"
+traceId: #Store:mdc,Implemented:http_filter
+  '调用链ID，全局唯一'
+spanId: #Store:mdc,Implemented:http_filter
+  '同一个调用链下的分段调用ID'
+logicId: #Store:mdc,Implemented:http_filter
+  '同一个分段调用下的服务内部调用ID'
+hostIp: #Implemented:layout_generate
+  '所在服务IP'
+consumedTime: #Implemented:http_filter
+  '花费时间(单位：ms)，表示在当前阶段花费的时间'
+msgType: #Implemented:http_filter
+  |-
+    消息类型,具有相同的msgType应该反映相同语义的事件
+    http: http调用
+    dubbo: dubbo调用
+    kafka: kafka调用
+    service: service内部调用
+    sql: sql语句执行信息
+source: #Format:json,Implemented:http_filter
+  |-
+    来源,表示请求的来源
+    clientIp: 客户端IP
+    header: http请求头
+    url: http请求url
+location: #Format:json,Implemented:
+  |-
+    位置,表示调用的地方
+    clazz: 调用类
+    method: 调用方法名
+    line: 调用行
+args:  #Implemented:http_filter
+  |-
+    参数,表示输入的参数信息
+    取值范围:
+      http请求内容
+      service方法调用参数
+      dubbo_consumer调用参数
+      dubbo_provider调用参数
+      kafka producer消息内容
+      kafka consumer消息内容
+      sql语句及参数
+result:  #Implemented:http_filter
+  |-
+    结果,表示当前的结果
+    取值范围:
+      http响应内容
+      service方法返回结果
+      dubbo_consumer调用结果
+      dubbo_provider调用结果
+      kafka producer发送结果
+      kafka consumer接收结果
+      sql执行结果
+message:
+  |-
+    普通日志内容，不是跟踪日志
+exception: #Format:json,Implemented:layout_generate
+  |-
+    异常信息
+    exceptionClass: 异常发生的类
+    exceptionMessage: 异常消息
+    stacktrace: 异常栈信息
